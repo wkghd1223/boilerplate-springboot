@@ -1,0 +1,83 @@
+spring:
+  application:
+    name: boilerplate-springboot
+  servlet:
+    multipart:
+      maxFileSize: 30MB
+      maxRequestSize: 30MB
+  mvc:
+    servlet:
+      path: /api
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    dispatch-options-request: true
+  # PostgreSQL DB Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/boilerplate
+    username: boilerplate
+    password: boilerplate1@
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 5
+      idle-timeout: 10000
+      max-life-time: 580000
+      connection-test-query: "SELECT 1"
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    generate-ddl: false
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: service
+        show-sql: true
+        format_sql: true
+        use_sql_comments: true
+        highlight_sql: true
+        physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+# MyBatis Configuration
+mybatis:
+  configuration:
+    default-statement-timeout: 30
+    jdbc-type-for-null: varchar
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    auto-mapping-unknown-column-behavior: none
+
+server:
+  url: http://localhost:8080/api
+  env: local
+  port: 8080
+  tomcat:
+    connection-timeout: 60000
+
+  ## Swagger API
+springdoc:
+  packages-to-scan: com.example.boilerplatespringboot..api
+  packages-to-exclude: com.example.boilerplatespringboot..api.error
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  writer-with-default-pretty-printer: true
+  use-fqn: true
+  override-with-generic-response: false
+  swagger-ui:
+    path: /swagger
+    url: /v3/api-docs
+    disable-swagger-default-url: true
+    display-request-duration: false
+    operations-sorter: alpha
+
+jwt:
+  secret: G06t7wEAdJ7FfUfd3K8T98YVRVDUNCVfPF8mcHg8ATXiqByDicqL0aaN3WYpF0SMKF
+  expire-time:
+    access-token: 600000
+    refresh-token: 24000000
+
+my:
+  encrypt:
+    secret: klj$)rjkafdwi#eo213
+    salt: 9128429305

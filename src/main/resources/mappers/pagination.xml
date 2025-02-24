@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pagination">
+    <sql id="page">
+        LIMIT #{size} OFFSET #{page} * #{size}
+    </sql>
+
+    <sql id="countStart">
+        SELECT count (*)
+        FROM (
+    </sql>
+    <sql id="countEnd">
+             ) my_cnt
+    </sql>
+</mapper>

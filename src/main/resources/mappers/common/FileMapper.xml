@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boilerplatespringboot.api.common.mapper.FileMapper">
+    <sql id="selectFile">
+        select
+            fd.file_num file_sn,
+            fd.file_id,
+            fd.pth path,
+            fd.file_nm file_name,
+            fd.orig_file_nm original_file_name,
+            fd.ext extension,
+            fd.sz size
+        from service.file_dtl_tbl fd
+    </sql>
+    <select id="getFileDetail" resultType="fileDetail">
+        <include refid="selectFile" />
+        where file_num = #{fileSn}
+        and file_id = #{fileId}
+    </select>
+
+    <select id="deleteFileDetail" parameterType="fileDetail">
+        DELETE
+        FROM service.file_dtl_tbl fd
+        WHERE file_id = #{fileId}
+          AND file_num = #{fileSn}
+    </select>
+
+    <select id="getFileByFileId" parameterType="String" resultType="fileBase">
+        <include refid="selectFile" />
+        WHERE file_id = #{fileId}
+        order by file_num desc
+        limit 1
+    </select>
+
+    <select id="getFilesByFileId" parameterType="String" resultType="fileBase">
+        <include refid="selectFile" />
+        WHERE file_id = #{fileId}
+        order by file_num desc
+    </select>
+</mapper>
