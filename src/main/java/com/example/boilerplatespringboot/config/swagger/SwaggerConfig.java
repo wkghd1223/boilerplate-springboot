@@ -88,7 +88,7 @@ public class SwaggerConfig {
 
     private Info apiInfo() {
         return new Info()
-                .title("5works boilerplate")
+                .title("boilerplate")
                 .description("<strong>prefix URI : /api</strong>")
                 .version("1.0.0");
     }

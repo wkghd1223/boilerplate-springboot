@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boilerplatespringboot.api.notice.mapper.NoticeMapper">
+
+    <sql id="selectNotice">
+        SELECT *
+    </sql>
+    <sql id="fromNotice">
+        FROM service.ntc_tbl nt
+    </sql>
+    <sql id="getNoticeListSQL">
+        <include refid="selectNotice"/>
+        <include refid="fromNotice"/>
+        WHERE nt.del_at is NULL
+    </sql>
+    <select id="getNoticeList">
+        <include refid="getNoticeListSQL"/>
+        <include refid="pagination.page"/>
+    </select>
+    <select id="getNoticeListCount">
+        <include refid="pagination.countStart"/>
+        <include refid="getNoticeListSQL"/>
+        <include refid="pagination.countEnd"/>
+    </select>
+    <select id="getNotice">
+        <include refid="selectNotice"/>
+        <include refid="fromNotice"/>
+        WHERE nt.del_at is NULL
+        AND nt.ntc_id = #{noticeId}
+    </select>
+</mapper>
